@@ -1,3 +1,4 @@
+const fs = require('fs');
 const gulp = require('gulp');
 const GulpSSH = require('gulp-ssh');
 
@@ -6,12 +7,18 @@ const sitConfig = {
         host: '{{cdnHost}}',
         port: 22,
         username: '{{cdnUserName}}',
-        password: '{{cdnPassword}}'
+        password: '{{cdnPassword}}',
+        privateKey: fs.readFileSync('{{cdnPrivateKey}}')
     },
     remotePath: '{{cdnRemotePath}}',
 }
+const dangerPath = /(^\/$)|(^.\/$)|(\*)/g;
 
 gulp.task('remove', () => {
+    if(!sitConfig.remotePath || dangerPath.exec(remotePath)) {
+        console.log('remotePath Error');
+        return;
+    }
     const gulpSSH = new GulpSSH({
         ignoreErrors: false,
         sshConfig: sitConfig.ssh
@@ -25,6 +32,10 @@ gulp.task('remove', () => {
 })
 
 gulp.task('deploy', () => {
+    if(!sitConfig.remotePath || dangerPath.exec(remotePath)) {
+        console.log('remotePath Error');
+        return;
+    }
     const gulpSSH = new GulpSSH({
         ignoreErrors: false,
         sshConfig: sitConfig.ssh
