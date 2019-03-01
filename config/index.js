@@ -12,7 +12,9 @@ module.exports = {
         //是否使用dev-server代理跨域
         useProxy: true,
         //后端接口地址
-        httpPath: dev.useProxy ? `http://${dev.host}:${dev.FEPort}/api/` : `http://${dev.host}:${dev.BEPort}`
+        get httpPath() {
+            return this.useProxy ? `http://${this.host}:${this.FEPort}/api/` : `http://${this.host}:${this.BEPort}`;
+        }
     },
     sit: {
         var: {
