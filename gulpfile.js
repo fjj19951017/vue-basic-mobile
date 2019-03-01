@@ -7,16 +7,16 @@ const sitConfig = {
         host: '{{cdnHost}}',
         port: 22,
         username: '{{cdnUserName}}',
-        password: '{{cdnPassword}}',
-        privateKey: fs.readFileSync('{{cdnPrivateKey}}')
+        privateKey: fs.readFileSync('{{cdnPrivateKey}}'),
+        passphrase: '{{cdnPassphrase}}'
     },
     remotePath: '{{cdnRemotePath}}',
 }
-const dangerPath = /(^\/$)|(^.\/$)|(\*)/g;
+const dangerPath = /(\/$)|(\*)/g;
 
 gulp.task('remove', () => {
-    if(!sitConfig.remotePath || dangerPath.exec(remotePath)) {
-        console.log('remotePath Error');
+    if(!sitConfig.remotePath || dangerPath.exec(sitConfig.remotePath)) {
+        console.log('remotePath is dangerous, refuse to execute \'remove\'');
         return;
     }
     const gulpSSH = new GulpSSH({
@@ -32,8 +32,8 @@ gulp.task('remove', () => {
 })
 
 gulp.task('deploy', () => {
-    if(!sitConfig.remotePath || dangerPath.exec(remotePath)) {
-        console.log('remotePath Error');
+    if(!sitConfig.remotePath || dangerPath.exec(sitConfig.remotePath)) {
+        console.log('remotePath is dangerous, refuse to execute \'deploy\'');
         return;
     }
     const gulpSSH = new GulpSSH({

@@ -18,7 +18,9 @@ module.exports = {
         filename: 'static/js/[name].[chunkhash:8].js'
     },
     resolve: {
+        extensions: ['.js', '.vue', '.json'],
         alias: {
+            '@': path.resolve('src'),
             'vue': 'vue/dist/vue.js'
         }
     },

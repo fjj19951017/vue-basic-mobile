@@ -11,6 +11,10 @@
 </script>
 
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
     #app {
         position: absolute;
         width: 100%;

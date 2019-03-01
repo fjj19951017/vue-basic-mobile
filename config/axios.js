@@ -21,19 +21,24 @@ switch (process.env.NODE_ENV) {
     default: ;
 }
 
+//拦截请求
+axios.interceptors.request.use(config => {
+        //...
+        return config;
+    }, error => {
+        //...
+        return Promise.reject(error);
+    }
+);
+
 //拦截响应
 axios.interceptors.response.use(
     response => {
+        //...
         return response;
     },
     error => {
-        if (error.message.includes('timeout')) {
-            this.$toast.show({
-                text: '网络异常，请检查网络环境',
-                type: 'fail'
-            });
-            return Promise.reject(error);
-        }
+        //...
         return Promise.reject(error);
     }
 );
