@@ -47,6 +47,13 @@ process.env.NODE_ENV
 + 测试: testing
 + 生产: production
 
-## 手机调试
+## 常见问题
 
-把config/index.js中的dev.host改成本机ip即可
+Q: 生产环境如何自动上传?  
+A: 为了防止输错命令直接覆盖生产资源, 生产环境还是自己手动上传  
+  
+Q: html在cdn中, 调用后端接口, 浏览器提示跨域?
+A: 修改nginx配置, 将cdn域名加入cors白名单
+
+Q: 如何手机调试
+A: 把config/index.js中的dev.host改成本机ip即可

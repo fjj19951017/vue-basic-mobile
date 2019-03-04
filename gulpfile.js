@@ -29,7 +29,7 @@ gulp.task('remove', () => {
     .on('finish', () => {
         console.log('done.');
     });
-})
+});
 
 gulp.task('deploy', () => {
     if(!sitConfig.remotePath || dangerPath.exec(sitConfig.remotePath)) {

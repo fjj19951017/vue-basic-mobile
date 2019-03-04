@@ -48,7 +48,7 @@ module.exports = {
                 test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
                 loader: 'url-loader',
                 query: {
-                    limit: 1,
+                    limit: 100000,
                     name: 'static/media/[name].[hash:8].[ext]'
                 }
             },
@@ -56,7 +56,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|ttf|svg|woff|eot)$/,
                 loader: 'url-loader',
                 query: {
-                    limit: 1,
+                    limit: 100000,
                     name: 'static/image/[name].[hash:8].[ext]'
                 }
             }
