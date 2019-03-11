@@ -1,9 +1,9 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const config = require('../config').sit;
 
@@ -34,10 +34,10 @@ module.exports = {
                 test: /\.(css|less)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "style-loader",
-                    "css-loader",
-                    "postcss-loader",
-                    "less-loader"
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader'
                 ]
             },
             {
@@ -78,14 +78,6 @@ module.exports = {
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendor',
                     priority: -10
-                },
-                styles: {
-                    name: 'styles',
-                    test: /\.(less|css)$/,
-                    chunks: 'all',
-                    minChunks: 1,
-                    reuseExistingChunk: true,
-                    enforce: true
                 }
             }
         },
@@ -108,14 +100,14 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            "process.env": config.var
+            'process.env': config.var
         }),
         new CleanWebpackPlugin(['dist'], {
             root: path.resolve(__dirname, '../')
         }),
         new MiniCssExtractPlugin({
-            filename: "static/css/[name].[contenthash:8].css",
-            chunkFilename: "static/css/[id].[contenthash:8].css"
+            filename: 'static/css/[name].[contenthash:8].css',
+            chunkFilename: 'static/css/[id].[contenthash:8].css'
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',

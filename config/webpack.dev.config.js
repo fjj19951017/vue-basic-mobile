@@ -1,5 +1,5 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -29,16 +29,16 @@ module.exports = {
             {
                 test: /\.(css|less)$/,
                 use: [{
-                        loader: "style-loader"
+                        loader: 'style-loader'
                     },
                     {
-                        loader: "css-loader"
+                        loader: 'css-loader'
                     },
                     {
-                        loader: "less-loader"
+                        loader: 'less-loader'
                     },
                     {
-                        loader: "postcss-loader"
+                        loader: 'postcss-loader'
                     }
                 ]
             },
@@ -58,11 +58,11 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, "../"),
+        contentBase: path.join(__dirname, '../'),
         port: config.FEPort,
         host: config.host,
         stats: 'errors-only',
-        clientLogLevel: "none",
+        clientLogLevel: 'none',
         hot: true,
         inline: true,
         quiet: true,
@@ -79,7 +79,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            "process.env": config.var
+            'process.env': config.var
         }),
         new webpack.HotModuleReplacementPlugin(),
         new FriendlyErrorsWebpackPlugin({
@@ -92,7 +92,7 @@ module.exports = {
                 }
                 const error = errors[0];
                 notifier.notify({
-                    title: "Webpack error",
+                    title: 'Webpack error',
                     message: severity + ': ' + error.name,
                     subtitle: error.file || ''
                 });
@@ -104,5 +104,5 @@ module.exports = {
             template: 'index.html',
             inject: true
         })
-    ],
+    ]
 };
