@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const config = require('../config').dev;
 
 module.exports = {
@@ -28,18 +29,11 @@ module.exports = {
             },
             {
                 test: /\.(css|less)$/,
-                use: [{
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'less-loader'
-                    },
-                    {
-                        loader: 'postcss-loader'
-                    }
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader',
+                    'postcss-loader'
                 ]
             },
             {
@@ -78,6 +72,7 @@ module.exports = {
         }
     },
     plugins: [
+        new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             'process.env': config.var
         }),

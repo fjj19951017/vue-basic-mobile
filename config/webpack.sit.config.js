@@ -5,6 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const config = require('../config').sit;
 
 module.exports = {
@@ -34,7 +36,6 @@ module.exports = {
                 test: /\.(css|less)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'style-loader',
                     'css-loader',
                     'postcss-loader',
                     'less-loader'
@@ -85,20 +86,23 @@ module.exports = {
             new UglifyJsPlugin({
                 uglifyOptions: {
                     compress: {
-                        // 删除所有的 `console` 语句
                         drop_console: false,
                     },
                     output: {
-                        // 最紧凑的输出
                         beautify: false
                     }
                 },
                 sourceMap: true
             }),
-            new OptimizeCSSAssetsPlugin({})
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: {
+                    map: { inline: false }
+                  }
+            })
         ]
     },
     plugins: [
+        new VueLoaderPlugin(),
         new webpack.DefinePlugin({
             'process.env': config.var
         }),
@@ -118,6 +122,10 @@ module.exports = {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true
             }
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: 'static',
+            to: 'static'
+        }])
     ],
 };
