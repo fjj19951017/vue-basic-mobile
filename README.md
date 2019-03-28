@@ -52,8 +52,14 @@ process.env.NODE_ENV
 Q: 生产环境如何自动上传?  
 A: 为了防止输错命令直接覆盖生产资源, 生产环境还是自己手动上传  
   
-Q: html在cdn中, 调用后端接口, 浏览器提示跨域?
+Q: html在cdn中, 调用后端接口, 浏览器提示跨域?  
 A: 修改nginx配置, 将cdn域名加入cors白名单
 
-Q: 如何手机调试
+Q: html在cdn中，如何解决缓存问题?  
+A: 先请求后端接口，后端重定向时加版本号
+
+Q: 如何手机调试?  
 A: 把config/index.js中的dev.host改成本机ip即可
+
+Q: static文件夹和assets文件夹有何区别?  
+A: static文件夹存放不想被webpack打包的文件，比如jQuery.min.js，已经被官方压缩处理好，不需要再自己处理；注意static中的资源不使用require或import引入，需要使用`绝对路径`引用，否则还是会被webpack处理。
